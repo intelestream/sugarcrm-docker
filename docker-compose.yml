@@ -1,0 +1,26 @@
+intelecrm:
+  image: neds75/intelecrm:0.1.0
+  command: apache2-foreground
+  links:
+    - mysql
+    - elasticsearch
+  volumes:
+    - .:/app
+  ports:
+    - "80:80"
+
+mysql:
+  image: mysql:5.6
+  ports:
+    - "3306:3306"
+  environment:
+    - MYSQL_ROOT_PASSWORD=nikoKaoJa123
+    - MYSQL_USER=intelecrm
+    - MYSQL_PASSWORD=intelecrm
+    - MYSQL_DATABASE=intelecrm
+
+elasticsearch:
+  image: elasticsearch:1.4
+  ports:
+    - "9200:9200"
+    - "9300:9300"    

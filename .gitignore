@@ -1,0 +1,12 @@
+composer.phar
+.DS_Store
+Thumbs.db
+.settings
+.project
+.buildpath
+vendor/.git
+.env*.php*
+.idea
+*~
+/nbproject/private/
+crm/
