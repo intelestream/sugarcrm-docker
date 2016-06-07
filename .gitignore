@@ -10,3 +10,4 @@ vendor/.git
 *~
 /nbproject/private/
 crm/
+/logs
