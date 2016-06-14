@@ -1,5 +1,5 @@
 intelecrm:
-  image: neds75/intelecrm:0.1.0
+  image: neds75/intelecrm:latest
   command: apache2-foreground
   links:
     - mysql
@@ -23,4 +23,4 @@ elasticsearch:
   image: elasticsearch:1.4
   ports:
     - "9200:9200"
-    - "9300:9300"    
+    - "9300:9300"
