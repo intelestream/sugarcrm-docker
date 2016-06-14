@@ -12,7 +12,7 @@ https://docs.docker.com/machine/reference/create/
 4. eval "$(docker-machine env intelecrm)"
 
 
-5. docker-machine ip default
+5. docker-machine ip intelecrm
 You will get output like:
 192.168.99.100 - remember this ip address we will use it latter. It can be different on your host.
 
