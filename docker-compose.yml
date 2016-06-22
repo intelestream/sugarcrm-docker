@@ -1,5 +1,5 @@
 sugarcrm:
-  image: neds75/sugarcrm:latest
+  image: intelestream/sugarcrm:latest
   command: apache2-foreground
   links:
     - mysql_crm
