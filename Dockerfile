@@ -8,7 +8,7 @@ RUN apt-get update && apt-get upgrade -y
 
 RUN apt-get install -y \
         vim \
-        wget 
+        wget
 
 ## Install gd with it's dependencies
 RUN apt-get install -y \
@@ -24,7 +24,7 @@ RUN apt-get install -y \
 
 ## Install imap
 RUN docker-php-ext-configure imap --with-imap-ssl --with-kerberos \
-    && docker-php-ext-install imap 
+    && docker-php-ext-install imap
 
 ## A few easy to install dependencies
 RUN docker-php-ext-install iconv mcrypt json
@@ -36,6 +36,9 @@ RUN docker-php-ext-install zip
 ## Install Soap extension and it's dependencies
 RUN apt-get install -y libxml2 libxml2-dev
 RUN docker-php-ext-install simplexml soap
+
+## Install opcache
+RUN docker-php-ext-install opcache
 
 ## Install mysqli/pdo mysql and it's dependencies
 RUN docker-php-ext-install mysqli pdo pdo_mysql
@@ -53,6 +56,11 @@ RUN docker-php-ext-install exif
 ## install bcmath
 RUN docker-php-ext-install bcmath
 
+# Install XDebug
+RUN pecl install -o -f xdebug \
+    && rm -rf /tmp/pear
+COPY ./docker/config/php/99-xdebug.ini /usr/local/etc/php/conf.d/
+
 # Composer
 ## Set environment variables
 ENV COMPOSER_HOME /root/composer
@@ -64,23 +72,25 @@ RUN apt-get install -y git
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 ## Apache
-COPY docker/apache2.conf /etc/apache2/
+COPY ./docker/config/apache/apache2.conf /etc/apache2/
 
 ## Enable Apache modules
 RUN a2enmod rewrite negotiation headers ssl
 
 # For OSX, maybe need to be removed for other systems???
-RUN usermod -u 1000 www-data
+#RUN usermod -u 1000 www-data
 
 ## PHP
-COPY docker/php.ini /etc/php5/apache2/
-COPY docker/php.ini /usr/local/etc/php/
+COPY ./docker/config/php/php.ini /usr/local/etc/php/
 
 WORKDIR /app
 
 ENV APACHE_RUN_DIR /var/run/apache2
 
+# Start cron
+RUN service cron start
+
 ADD . .
 
 # Setup our site config
-COPY docker/httpd.conf /etc/apache2/sites-enabled/
+COPY ./docker/config/apache/sites.conf /etc/apache2/sites-enabled/

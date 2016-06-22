@@ -9,5 +9,6 @@ vendor/.git
 .idea
 *~
 /nbproject/private/
-crm/
+www/
 /logs
+docker/data/
