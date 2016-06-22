@@ -45,10 +45,11 @@ to based on results of previous step
 docker exec -i -t container_id /bin/bash
 
 
-** To set cronjob to run every minute as sugarcrm expects, we need to use
-absolute path for php cli, because php library is not in system path:
+** To set cronjob, add next line:
 * * * * * cd /app/www/crm; /usr/local/bin/php -f cron.php > /dev/null 2>&1
-
+And start cron service:
+service cron start
+Note that if you shutdown and remove container, you will need to set cronjob again for other instances.
 
 
 

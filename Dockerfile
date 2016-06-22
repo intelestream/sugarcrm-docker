@@ -87,6 +87,10 @@ WORKDIR /app
 
 ENV APACHE_RUN_DIR /var/run/apache2
 
+# Copy default cron job
+COPY ./docker/config/cron/sugarcrm /etc/cron.d/
+RUN chmod 0644 /etc/cron.d/sugarcrm
+
 # Start cron
 RUN service cron start
 
