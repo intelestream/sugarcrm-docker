@@ -9,16 +9,16 @@ docker-compose up
 from root folder created when the repo is cloned,
 and wait for images to be pulled and containers to be created
 
-3. Apache server should already listed on port 80, so you can access your website via
+4. Apache server should already listed on port 80, so you can access your website via
 http://localhost/test.php
 Changes you make in the source are immediately visible.
 
-4. Now copy sugarcrm code inside www folder. My suggestion is to create separate folder
+5. Now copy sugarcrm code inside www folder. My suggestion is to create separate folder
 called crm inside www folder, so you can have more then one instance of sugarcrms
 using same docker container.
 
 
-5. Open http://localhost in browser and start installation.
+6. Open http://localhost in browser and start installation.
 For Mysql enter next credentials:
 host: mysql_crm (yes, host is mysql_crm, it is resolved by docker - check docker-compose.yml)
 db: sugarcrm
@@ -32,7 +32,7 @@ For Elastic search:
 host: elasticsearch_crm (yes, this is host, again check docker-compose.yml)
 port: 9200
 
-6. Complete installation.
+7. Complete installation.
 
 If you need to access mysql, you can connect to it using ip address from 6.
 At some point we can add phpmyadmin software, but it is not needed for now.
